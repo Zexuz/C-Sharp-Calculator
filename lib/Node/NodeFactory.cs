@@ -18,10 +18,16 @@ namespace Calculator.lib.Node {
         };
 
         public static OpNode GetOperationNode(ConsoleKey key) {
-
-            if(!Operations.ContainsKey(key)) throw new InvalidOperationException($"The operation {key} is not valid");
+            if (!Operations.ContainsKey(key)) throw new InvalidOperationException($"The operation {key} is not valid");
 
             return Operations[key];
+        }
+
+        public static double GetSumFromNode(ConsoleKey key, double d1, double d2) {
+            var opNode = GetOperationNode(key);
+            opNode.Left = SetValueOfNode(d1);
+            opNode.Right = SetValueOfNode(d2);
+            return opNode.Evaluate();
         }
 
 
