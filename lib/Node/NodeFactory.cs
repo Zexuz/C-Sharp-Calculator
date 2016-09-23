@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Calculator.lib.Exceptions;
 using Calculator.lib.Node.Opeartions;
@@ -9,19 +10,18 @@ namespace Calculator.lib.Node {
 
     public class NodeFactory {
 
+        private static readonly Dictionary<ConsoleKey, OpNode> Operations = new Dictionary<ConsoleKey, OpNode> {
+            {ConsoleKey.Add, new AdditionNode()},
+            {ConsoleKey.Multiply, new MultiplicationNode()},
+            {ConsoleKey.Divide, new DivissionNode()},
+            {ConsoleKey.Subtract, new SubtractionNode()}
+        };
+
         public static OpNode GetOperationNode(ConsoleKey key) {
-            switch (key) {
-                case ConsoleKey.Add:
-                    return new AdditionNode();
-                case ConsoleKey.Multiply:
-                    return new MultiplicationNode();
-                case ConsoleKey.Divide:
-                    return new DivissionNode();
-                case ConsoleKey.Subtract:
-                    return new SubtractionNode();
-                default:
-                    throw new InvalidOperationException($"The operation {key} is not valid");
-            }
+
+            if(!Operations.ContainsKey(key)) throw new InvalidOperationException($"The operation {key} is not valid");
+
+            return Operations[key];
         }
 
 
