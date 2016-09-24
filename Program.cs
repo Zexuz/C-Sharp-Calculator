@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Calculator.lib.Node;
 
 namespace Calculator {
@@ -6,9 +7,8 @@ namespace Calculator {
     internal class Program {
 
         private void Start() {
-
             Console.WriteLine("Type the operation (+,-,/,*)");
-            var operation = NodeFactory.GetOperationNode(Console.ReadKey().Key);
+            var operation = NodeFactory.GetOperationNode(Console.ReadKey().KeyChar);
 
             Console.WriteLine("\nFirst number");
 
@@ -25,17 +25,10 @@ namespace Calculator {
         }
 
 
-
-
-
         static void Main(string[] args) {
-
             new Program().Start();
-
         }
 
     }
 
 }
-
-

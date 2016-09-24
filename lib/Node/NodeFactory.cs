@@ -10,20 +10,20 @@ namespace Calculator.lib.Node {
 
     public class NodeFactory {
 
-        private static readonly Dictionary<ConsoleKey, OpNode> Operations = new Dictionary<ConsoleKey, OpNode> {
-            {ConsoleKey.Add, new AdditionNode()},
-            {ConsoleKey.Multiply, new MultiplicationNode()},
-            {ConsoleKey.Divide, new DivissionNode()},
-            {ConsoleKey.Subtract, new SubtractionNode()}
+        private static readonly Dictionary<char, OpNode> Operations = new Dictionary<char, OpNode> {
+            {'+', new AdditionNode()},
+            {'*', new MultiplicationNode()},
+            {'/', new DivissionNode()},
+            {'-', new SubtractionNode()}
         };
 
-        public static OpNode GetOperationNode(ConsoleKey key) {
+        public static OpNode GetOperationNode(char key) {
             if (!Operations.ContainsKey(key)) throw new InvalidOperationException($"The operation {key} is not valid");
 
             return Operations[key];
         }
 
-        public static double GetSumFromNode(ConsoleKey key, double d1, double d2) {
+        public static double GetSumFromNode(char key, double d1, double d2) {
             var opNode = GetOperationNode(key);
             opNode.Left = SetValueOfNode(d1);
             opNode.Right = SetValueOfNode(d2);
